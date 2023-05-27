@@ -1,0 +1,64 @@
+{
+  "name": "buss-manager-api",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/buss-manager-api/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/apps/buss-manager-api",
+        "main": "apps/buss-manager-api/src/main.ts",
+        "tsConfig": "apps/buss-manager-api/tsconfig.app.json",
+        "assets": ["apps/buss-manager-api/src/assets"],
+        "isolatedConfig": true,
+        "webpackConfig": "apps/buss-manager-api/webpack.config.js"
+      },
+      "configurations": {
+        "development": {},
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "buss-manager-api:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "buss-manager-api:build:development"
+        },
+        "production": {
+          "buildTarget": "buss-manager-api:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/buss-manager-api/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/buss-manager-api/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    }
+  },
+  "tags": []
+}

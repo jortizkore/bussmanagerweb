@@ -1,0 +1,278 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model department {
+  id          Int        @id @default(autoincrement())
+  name        String
+  description String
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  employees   employee[]
+}
+
+model permissions {
+  name      String   @id @unique
+  roles     role[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model role {
+  id              Int           @id @default(autoincrement())
+  roleName        String
+  rolePermissions permissions[]
+  employees       employee[]
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+}
+
+model employee {
+  id           String     @id @default(uuid())
+  names        String
+  lastName     String
+  idNumber     String
+  phoneNumber  String?
+  adress       String?
+  baseSalary   Decimal
+  departmentId Int
+  department   department @relation(fields: [departmentId], references: [id])
+  roleId       Int
+  role         role       @relation(fields: [roleId], references: [id])
+  loginUser    loginUser?
+  bussinessId  String
+  bussiness    bussiness  @relation(fields: [bussinessId], references: [id])
+  sells        sell[]
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+}
+
+model loginUser {
+  userName     String    @id @unique
+  userPassword String
+  userId       String    @unique
+  userInfo     employee? @relation(fields: [userId], references: [id])
+  partnerInfo  partner?  @relation(fields: [userId], references: [id])
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+}
+
+model admin {
+  id           String  @id @default(uuid())
+  username     String  @unique
+  password     String
+  pageOwner    Boolean
+  adminName    String
+  adminIdNumer String
+  adminPhone   String
+}
+
+model bussiness {
+  id            String         @id @default(uuid())
+  bussinessName String
+  phoneNumber   String?
+  address       String?
+  RNC           String?
+  ownerId       String
+  isActive      Boolean        @default(true)
+  employees     employee[]
+  owner         partner        @relation(fields: [ownerId], references: [id])
+  products      product[]
+  expenses      expense[]
+  losts         lost[]
+  accounts      accounts[]
+  providers     provider[]
+  accountsToPay accountToPay[]
+  client        client[]
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+}
+
+model partner {
+  id          String      @id @default(uuid())
+  names       String
+  lastName    String
+  idNumber    String
+  phoneNumber String?
+  address     String?
+  loginUser   loginUser?
+  bussinesses bussiness[]
+  isActive    Boolean     @default(true)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}
+
+model productType {
+  id        Int       @id @default(autoincrement())
+  typeName  String
+  products  product[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model product {
+  id            String      @id @default(uuid())
+  productName   String
+  productTypeId Int
+  productType   productType @relation(fields: [productTypeId], references: [id])
+  cost          Decimal     @default(0)
+  price         Decimal
+  quantity      Int         @default(0)
+  lote          Int
+  barCode       String
+  bussinessId   String
+  bussiness     bussiness   @relation(fields: [bussinessId], references: [id])
+  sells         sell[]
+  purchases     purchase[]
+  losts         lost[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model sell {
+  id         Int      @id @default(autoincrement())
+  productId  String
+  product    product  @relation(fields: [productId], references: [id])
+  quantity   Int      @default(1)
+  subTotal   Decimal
+  discount   Decimal
+  tax        Decimal
+  total      Decimal
+  employeeId String
+  employee   employee @relation(fields: [employeeId], references: [id])
+  billId     Int
+  bill       bill     @relation(fields: [billId], references: [id])
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model purchase {
+  id         Int      @id @default(autoincrement())
+  productId  String
+  product    product  @relation(fields: [productId], references: [id])
+  quantity   Int
+  amount     Decimal
+  discount   Decimal
+  tax        Decimal
+  grandTotal Decimal
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model paymentMethod {
+  id            Int      @id @default(autoincrement())
+  paymentMethod String
+  cashIn        Boolean
+  bills         bill[]
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model bill {
+  id Int @id @default(autoincrement())
+
+  invoiceTotal      Decimal
+  paymentMethodId   Int
+  paymentMethod     paymentMethod       @relation(fields: [paymentMethodId], references: [id])
+  productsSelled    sell[]
+  accountsToReceive accountsToReceive[]
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+}
+
+model expense {
+  id            Int       @id @default(autoincrement())
+  expenseReason String
+  amount        Decimal
+  bussinessId   String
+  bussiness     bussiness @relation(fields: [bussinessId], references: [id])
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model lost {
+  id          Int       @id @default(autoincrement())
+  lostReason  String
+  productId   String
+  product     product?  @relation(fields: [productId], references: [id])
+  amount      Decimal
+  bussinessId String
+  bussiness   bussiness @relation(fields: [bussinessId], references: [id])
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model accounts {
+  id          Int       @id @default(autoincrement())
+  accountName String
+  amount      Decimal
+  bussinessId String
+  bussiness   bussiness @relation(fields: [bussinessId], references: [id])
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model provider {
+  id           Int            @id @default(autoincrement())
+  providerName String
+  phoneNumber  String?
+  bussinessId  String
+  bussiness    bussiness      @relation(fields: [bussinessId], references: [id])
+  pendingBills accountToPay[]
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+}
+
+model client {
+  id           Int                 @id @default(autoincrement())
+  clientName   String
+  phoneNumber  String?
+  address      String?
+  bussinessId  String
+  bussiness    bussiness           @relation(fields: [bussinessId], references: [id])
+  pendingBills accountsToReceive[]
+  createdAt    DateTime            @default(now())
+  updatedAt    DateTime            @updatedAt
+}
+
+model accountToPay {
+  id          Int       @id @default(autoincrement())
+  amount      Decimal
+  comment     String?
+  providerId  Int
+  bussinessId String
+  bussiness   bussiness @relation(fields: [bussinessId], references: [id])
+  provider    provider  @relation(fields: [providerId], references: [id])
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model accountsToReceive {
+  id            Int       @id @default(autoincrement())
+  pendingAmount Decimal
+  clientId      Int?
+  billId        Int
+  client        client?   @relation(fields: [clientId], references: [id])
+  bill          bill?     @relation(fields: [billId], references: [id])
+  payments      payment[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model payment {
+  id                 Int               @id @default(autoincrement())
+  amount             Decimal
+  accountToReceiveId Int
+  accountToReceive   accountsToReceive @relation(fields: [accountToReceiveId], references: [id])
+  createdAt          DateTime          @default(now())
+  updatedAt          DateTime          @updatedAt
+}

@@ -1,0 +1,67 @@
+<div>
+  <table mat-table [dataSource]="data" class="mat-elevation-z8">
+    <ng-container
+      *ngFor="let column of columnDef"
+      matColumnDef="{{ column.columnDef }}"
+    >
+      <ng-container
+        *ngIf="column.columnDef !== 'update' && column.columnDef !== 'delete'"
+      >
+        <th mat-header-cell *matHeaderCellDef>{{ column.header }}</th>
+        <td mat-cell *matCellDef="let col">{{ column.cell(col) }}</td>
+      </ng-container>
+
+      <!-- THIS IS THE GENERIC UPDATE BUTTON ON TABLE-->
+      <ng-container *ngIf="column.columnDef === 'update'">
+        <th mat-header-cell *matHeaderCellDef>Update</th>
+        <td mat-cell *matCellDef="let col">
+          <div>
+            <button
+              mat-icon-button
+              color="primary"
+              (click)="
+                triggerFunction(
+                  column.cell(col).callBack,
+                  col,
+                  column.cell(col).redirectLink
+                )
+              "
+            >
+              <mat-icon>edit</mat-icon>
+            </button>
+          </div>
+        </td>
+      </ng-container>
+
+      <ng-container *ngIf="column.columnDef === 'delete'">
+        <th mat-header-cell *matHeaderCellDef>{{ column.header }}</th>
+        <td mat-cell *matCellDef="let col">
+          <div>
+            <button
+              mat-icon-button
+              color="warn"
+              (click)="
+                triggerFunction(
+                  column.cell(col).callBack,
+                  col,
+                  column.cell(col).redirectLink
+                )
+              "
+            >
+              <mat-icon>{{ column.cell(col).icon }}</mat-icon>
+            </button>
+          </div>
+        </td>
+      </ng-container>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columns"></tr>
+    <tr mat-row *matRowDef="let row; columns: columns"></tr>
+
+    <mat-paginator
+      [length]="data.length"
+      aria-label=""
+      [pageSizeOptions]="pageSizeOptions"
+    ></mat-paginator>
+  </table>
+</div>

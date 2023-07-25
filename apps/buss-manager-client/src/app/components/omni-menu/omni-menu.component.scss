@@ -1,0 +1,27 @@
+span {
+    margin: 10px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    padding-left: 10px;
+    padding-right: 10px;
+    transition: background-color 1s eaase;
+}
+
+span.fade-transition {
+    background-color: bisque;
+}       
+
+.menu-button-conntainer {
+    display: flex;
+    justify-content: space-around;
+    width: max-content;
+
+    button {
+        margin: 5px;
+    }
+}
+
+

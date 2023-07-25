@@ -1,0 +1,38 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title> Complete the following fields</mat-card-title>
+    <mat-card-subtitle>--</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="partner-form-container">
+      <mat-form-field appearance="outline">
+        <input matInput type="text" [(ngModel)]="bussiness.bussinessName" />
+        <mat-label>Insert Company Name</mat-label>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <input matInput type="text" [(ngModel)]="bussiness.phoneNumber" />
+        <mat-label>Insert Company Phone Number</mat-label>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <input matInput type="text" [(ngModel)]="bussiness.RNC" />
+        <mat-label>Insert RNC</mat-label>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <input matInput type="text" [(ngModel)]="bussiness.address" />
+        <mat-label>Insert Company Address</mat-label>
+      </mat-form-field>
+    </div>
+  </mat-card-content>
+  <mat-card-actions style="display: flex; margin: 5px">
+    <span style="flex-grow: 0.5"></span>
+    <button mat-flat-button color="primary" (click)="createBussiness()">
+      Save <mat-icon>save</mat-icon>
+    </button>
+    <button routerLink="../" mat-flat-button color="warn">
+      Cancel <mat-icon>cancel</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>

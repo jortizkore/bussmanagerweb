@@ -1,0 +1,24 @@
+<mat-toolbar>
+  <span routerLink="">Buss Manager</span>
+
+  <span
+    routerLink="{{ element.route }}"
+    *ngFor="let element of routesToDisplay"
+  >
+    {{ element.title }}
+  </span>
+
+  <!-- <span routerLink="bussiness">Bussiness</span>
+  <span routerLink="partners">Partners</span> -->
+
+  <span style="flex-grow: 1"></span>
+  <div class="menu-button-conntainer">
+    <button mat-flat-button color="primary" routerLink="login-page">
+      Log in <mat-icon>person</mat-icon>
+    </button>
+
+    <button routerLink="register-partner" mat-flat-button color="warn">
+      Become a partner!<mat-icon>person_add</mat-icon>
+    </button>
+  </div>
+</mat-toolbar>

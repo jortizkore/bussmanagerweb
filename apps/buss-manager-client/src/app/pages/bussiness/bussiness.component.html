@@ -1,0 +1,34 @@
+<div class="filter-container">
+  <mat-form-field appearance="outline">
+    <input
+      matInput
+      type="text"
+      placeholder="Company Name"
+      id="name"
+      [(ngModel)]="name"
+      (blur)="search()"
+    />
+    <mat-label>Company Name</mat-label>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <input
+      matInput
+      type="text"
+      placeholder="RNC"
+      id="RNC"
+      [(ngModel)]="rnc"
+      (blur)="search()"
+    />
+    <mat-label>RNC</mat-label>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-select [(ngModel)]="status" (valueChange)="searchStatus($event)">
+      <mat-option [value]="true">Active</mat-option>
+      <mat-option [value]="false">Deactivated</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<bmw-generic-table [columnDef]="bussinessColumnDef" [data]="filteredResults">
+</bmw-generic-table>

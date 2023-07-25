@@ -1,0 +1,43 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title> Complete the following fields</mat-card-title>
+    <mat-card-subtitle>--</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="partner-form-container">
+      <mat-form-field appearance="outline">
+        <input matInput type="text" [(ngModel)]="partnerToCreate.names" />
+        <mat-label>Insert your Name</mat-label>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <input matInput type="text" [(ngModel)]="partnerToCreate.lastName" />
+        <mat-label>Insert your Last Name</mat-label>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <input matInput type="text" [(ngModel)]="partnerToCreate.idNumber" />
+        <mat-label>Insert your Id Number</mat-label>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <input matInput type="text" [(ngModel)]="partnerToCreate.phoneNumber" />
+        <mat-label>Insert your Phone</mat-label>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <input matInput type="text" [(ngModel)]="partnerToCreate.address" />
+        <mat-label>Insert your Address</mat-label>
+      </mat-form-field>
+    </div>
+  </mat-card-content>
+  <mat-card-actions style="display: flex; margin: 5px">
+    <span style="flex-grow: 0.5"></span>
+    <button mat-flat-button color="primary" (click)="createPartner()">
+      Save <mat-icon>save</mat-icon>
+    </button>
+    <button mat-flat-button color="warn" routerLink="../">
+      Cancel <mat-icon>cancel</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>

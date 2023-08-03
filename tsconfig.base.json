@@ -16,7 +16,9 @@
     "baseUrl": ".",
     "paths": {
       "@buss-manager-web/[model-name]": ["libs/[model-name]/src/index.ts"],
+      "@buss-manager-web/auth-service": ["libs/auth-service/src/index.ts"],
       "@buss-manager-web/bussiness": ["libs/bussiness/src/index.ts"],
+      "@buss-manager-web/jwt-srvice": ["libs/jwt-srvice/src/index.ts"],
       "@buss-manager-web/login": ["libs/login/src/index.ts"],
       "@buss-manager-web/partner": ["libs/partner/src/index.ts"]
     }

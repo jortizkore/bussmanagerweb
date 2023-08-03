@@ -20,6 +20,7 @@ import {
 } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BussinessService } from './pages/bussiness/bussiness.service';
+import { LoginService } from './pages/login/loginService';
 
 
 
@@ -44,7 +45,7 @@ import { BussinessService } from './pages/bussiness/bussiness.service';
     RouterModule.forRoot(appRoutes, { initialNavigation: 'enabledBlocking' }),
     BrowserAnimationsModule,
   ],
-  providers: [PartnerService, BussinessService, HttpClient],
+  providers: [PartnerService, BussinessService, HttpClient, LoginService],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

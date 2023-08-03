@@ -12,21 +12,31 @@
       <div style="display: flex; flex-direction: column; margin-top: 10px">
         <mat-form-field appearance="outline">
           <mat-label>User Name</mat-label>
-          <input matInput type="text" #userName placeholder="Type user name" />
+          <input
+            matInput
+            [(ngModel)]="userName"
+            type="text"
+            placeholder="Type user name"
+          />
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>User Password</mat-label>
           <input
+            [(ngModel)]="password"
             matInput
             type="password"
-            #userPassword
             placeholder="Type user password"
           />
         </mat-form-field>
       </div>
     </mat-card-content>
+    <mat-slide-toggle [checked]="isAdmin" (change)="setAdminStatus($event)"
+      >I'm admin</mat-slide-toggle
+    >
     <mat-card-actions>
-      <button mat-button color="primary">Log in</button>
+      <button mat-raised-button color="primary" (click)="logInUser()">
+        <mat-icon>check</mat-icon> Log in
+      </button>
       <link href="./" textContent="Forgot password?" />
     </mat-card-actions>
   </mat-card>

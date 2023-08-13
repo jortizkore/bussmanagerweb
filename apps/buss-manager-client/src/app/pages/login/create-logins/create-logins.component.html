@@ -1,1 +1,50 @@
-<p>create-logins works!</p>
+<mat-card *ngIf="currentUser !== {}" class="register-mat-card">
+  <mat-card-header>
+    <mat-card-title> Complete the following fields</mat-card-title>
+    <mat-card-subtitle>--</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="register-form-container">
+      <mat-form-field appearance="outline">
+        <input matInput type="text" [(ngModel)]="user.userName" />
+        <mat-label>User Name</mat-label>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <input
+          matInput
+          #pass1
+          type="password"
+          [(ngModel)]="user.userPassword"
+        />
+        <mat-label>Password</mat-label>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <input
+          matInput
+          #pass2
+          (keyup)="shouldDisplaySaveBtn(pass1.value, pass2.value)"
+          type="password"
+        />
+        <mat-label>Repeat Password</mat-label>
+      </mat-form-field>
+    </div>
+  </mat-card-content>
+  <mat-card-actions
+    class="register-mat-card-actions"
+    style="display: flex; margin: 5px"
+  >
+    <span style="flex-grow: 0.5"></span>
+    <button
+      mat-flat-button
+      *ngIf="displaySaveBtn"
+      color="primary"
+      (click)="save()"
+    >
+      Save <mat-icon>person_add</mat-icon>
+    </button>
+    <button routerLink="../" mat-flat-button color="warn">
+      Cancel <mat-icon>cancel</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>

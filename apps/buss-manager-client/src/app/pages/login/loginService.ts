@@ -23,6 +23,8 @@ export class LoginService {
         this.subscriptions.push(
             this.http.post(`${environment.apiUrl}login/login`, loginUserBody, httpOptions).subscribe(res => {
                 if (res) {
+                    this.clearSubs();
+                    this.login$ubject.next(res);
                     console.log(res);
                 }
             }, err => {
@@ -31,11 +33,31 @@ export class LoginService {
             }
             )
         );
-        this.clearSubs();
+        //this.clearSubs();
     }
 
     clearSubs() {
         this.subscriptions.forEach(s => s.unsubscribe());
+    }
+
+    getLoginUserById(id: string) {
+        console.log('requested id: ', id);
+        const encodedId = encodeURIComponent(id);
+        return this.http.get(`${environment.apiUrl}login/get-login-user-by-id?id=${encodedId}`, httpOptions);
+    }
+
+    createLoginUser(loginUserBody: any) {
+        this.subscriptions.push(
+            this.http.post(`${environment.apiUrl}login/create-login`, loginUserBody, httpOptions).subscribe(res => {
+                if (res) {
+                    console.log('User created: ', res);
+                }
+            }, err => {
+                alert(err.message);
+                console.log(err);
+            }
+            )
+        );
     }
 
 }

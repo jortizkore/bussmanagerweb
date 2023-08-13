@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
 import { PartnerService } from './partner.service';
 
 @Controller('partner')
@@ -12,12 +12,13 @@ export class PartnerController {
     return this.partnerService.getPartners();
   }
 
-
-  @Get('/partner/:id')
-  public getPartner(@Param('id') id: string) {
+  // gets a partner by id
+  @Get('/partner?:id')
+  public getPartner(@Query('id') id: string) {
     return this.partnerService.getPartner(id);
   }
 
+  //create a new partner
   @Post('/partner')
   public addPartner(@Body() body: any) {
     const param = { data: body };
@@ -25,13 +26,16 @@ export class PartnerController {
     return this.partnerService.createPartner(param);
   }
 
+  //update a partner
   @Patch('/partner')
   public updatePartner(@Body() body: any) {
     return this.partnerService.updatePartner(body);
   }
 
-  @Delete('/partner/:id')
-  public deletePartner(@Param('id') id: string) {
+
+  // * Removes a partner ( not in use)
+  @Delete('/partner?:id')
+  public deletePartner(@Query('id') id: string) {
     return this.partnerService.deletePartner(id);
   }
 

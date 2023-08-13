@@ -1,5 +1,5 @@
 <div class="filter-container">
-  <mat-form-field appearance="outline">
+  <mat-form-field class="view-mat-form-field" appearance="outline">
     <input
       matInput
       type="text"
@@ -11,7 +11,7 @@
     <mat-label>Name</mat-label>
   </mat-form-field>
 
-  <mat-form-field appearance="outline">
+  <mat-form-field class="view-mat-form-field" appearance="outline">
     <input
       matInput
       type="text"
@@ -22,7 +22,7 @@
     />
     <mat-label>Id Number</mat-label>
   </mat-form-field>
-  <mat-form-field appearance="outline">
+  <mat-form-field class="view-mat-form-field" appearance="outline">
     <mat-select [(ngModel)]="status" (valueChange)="searchStatus($event)">
       <mat-option [value]="true">Active</mat-option>
       <mat-option [value]="false">Deactivated</mat-option>

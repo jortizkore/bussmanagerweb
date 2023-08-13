@@ -59,9 +59,10 @@ model employee {
 model loginUser {
   userName     String    @id @unique
   userPassword String
-  userId       String    @unique
-  userInfo     employee? @relation(fields: [userId], references: [id])
-  partnerInfo  partner?  @relation(fields: [userId], references: [id])
+  partnerId    String?   @unique
+  employeeId   String?   @unique
+  userInfo     employee? @relation(fields: [employeeId], references: [id])
+  partnerInfo  partner?  @relation(fields: [partnerId], references: [id])
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
 }

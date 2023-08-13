@@ -20,8 +20,19 @@ export class LoginService {
 
     // we can use this onr to log partners and employees
     getLoginUser(username: string, password: string) {
-        console.log('loginUser tried')
         return prisma.loginUser.findFirst({ where: { userName: username, userPassword: password } });
+    }
+
+    // we can use this onr to log partners and employees
+    async getLoginUserById(id: string) {
+        return await prisma.loginUser.findFirst({
+            where: {
+                OR: [
+                    { employeeId: id },
+                    { partnerId: id },
+                ],
+            }
+        });
     }
 
     // we can use this one to log admins
@@ -30,8 +41,8 @@ export class LoginService {
         return prisma.admin.findFirst({ where: { userName: username, password: password } });
     }
 
-    createLoginUser(loginUser: loginUser) {
-        return prisma.loginUser.create({ data: loginUser });
+    async createLoginUser(loginUser: loginUser) {
+        return await prisma.loginUser.create({ data: loginUser });
     }
 
     updateLoginUser(loginUser: loginUser) {

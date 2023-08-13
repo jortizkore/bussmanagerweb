@@ -1,0 +1,26 @@
+::ng-deep .register-form-container {
+  display: flex;
+  flex-direction: column;
+
+  mat-form-field {
+    width: 500px !important;
+  }
+}
+
+::ng-deep .register-mat-card {
+  width: max-content;
+  position: relative;
+  margin-top: 20px;
+  margin: auto;
+}
+
+::ng-deep .register-mat-card-actions {
+  button {
+    min-width: 200px;
+    margin: 5px;
+  }
+}
+
+::ng-deep .view-mat-form-field {
+  margin: 5px;
+}

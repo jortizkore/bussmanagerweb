@@ -13,6 +13,16 @@ export class BussinessService {
     getBussinessById(id: string) {
         return prisma.bussiness.findUnique({ where: { id: id } });
     }
+    async getBussinessByPartnerId(id: string) {
+
+        const partner = await prisma.partner.findUnique({
+            where: { id: id }, include: {
+                bussinesses: true
+            }
+        });
+        console.log(partner);
+        return partner?.bussinesses;
+    }
 
     async createBussiness(bussiness: any): Promise<any> {
         const buss = await prisma.bussiness.create({ data: bussiness });

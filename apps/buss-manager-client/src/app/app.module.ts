@@ -14,14 +14,21 @@ import { GenericTableComponent } from './components/generic-table/generic-table.
 import { PartnerService } from './pages/partners/partner.service';
 import { RegisterPartnerFormComponent } from './pages/partners/register-partner-form/register-partner-form.component';
 import { RegisterBussinessFormComponent } from './pages/bussiness/register-bussiness-form/register-bussiness-form.component';
-import {
-  HttpClient,
-  HttpClientModule,
-} from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BussinessService } from './pages/bussiness/bussiness.service';
-
-
+import { LoginService } from './pages/login/loginService';
+import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
+import { PartnerDasboardComponent } from './pages/partner-dasboard/partner-dasboard.component';
+import { CreateLoginsComponent } from './pages/login/create-logins/create-logins.component';
+import { EmployeesComponent } from './maintenance/employees/employees.component';
+import { RolesComponent } from './maintenance/roles/roles.component';
+import { WarehouseComponent } from './maintenance/warehouse/warehouse.component';
+import { InventoryComponent } from './maintenance/Inventory/inventory.component';
+import { SellsComponent } from './pages/sells/sells.component';
+import { PurchasesComponent } from './pages/purchases/purchases.component';
+import { DepartmentsComponent } from './maintenance/departments/departments.component';
+import { AdminComponent } from './maintenance/admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +43,17 @@ import { BussinessService } from './pages/bussiness/bussiness.service';
     GenericTableComponent,
     RegisterPartnerFormComponent,
     RegisterBussinessFormComponent,
+    AdminDashboardComponent,
+    PartnerDasboardComponent,
+    CreateLoginsComponent,
+    EmployeesComponent,
+    RolesComponent,
+    WarehouseComponent,
+    InventoryComponent,
+    SellsComponent,
+    PurchasesComponent,
+    DepartmentsComponent,
+    AdminComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,7 +62,7 @@ import { BussinessService } from './pages/bussiness/bussiness.service';
     RouterModule.forRoot(appRoutes, { initialNavigation: 'enabledBlocking' }),
     BrowserAnimationsModule,
   ],
-  providers: [PartnerService, BussinessService, HttpClient],
+  providers: [PartnerService, BussinessService, HttpClient, LoginService],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

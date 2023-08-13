@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Partner } from '../partner.model';
 import { PartnerService } from '../partner.service';
 import { Router } from '@angular/router';
+import { LoginService } from '../../login/loginService';
 
 @Component({
   selector: 'bmw-register-partner-form',
@@ -11,6 +12,8 @@ import { Router } from '@angular/router';
 export class RegisterPartnerFormComponent implements OnInit, OnDestroy {
 
   deactivatePartner = false;
+  displayLoginInfo = false;
+  loginInfo = {};
   partnerToCreate: Partner = {
     names: '',
     lastName: '',
@@ -20,7 +23,7 @@ export class RegisterPartnerFormComponent implements OnInit, OnDestroy {
     isActive: true,
   };
 
-  constructor(private partnerService: PartnerService, private router: Router) {
+  constructor(private partnerService: PartnerService, private loginService: LoginService, private router: Router) {
     const update = localStorage.getItem('partnerToUpdate');
     let remove: any = {};
     this.deactivatePartner = localStorage.getItem('partnerToDelete') ? true : false;
@@ -81,5 +84,31 @@ export class RegisterPartnerFormComponent implements OnInit, OnDestroy {
     this.goToPartnerView();
 
   }
+
+  loadLoginInfo(btnRef: any) {
+    btnRef.disabled = true;
+    if (this.partnerToCreate && this.partnerToCreate.id)
+      this.loginService.getLoginUserById(this.partnerToCreate.id).subscribe((res: any) => {
+        console.log('userinfo response', res);
+        if (res.createNew) {
+          this.loginInfo = {
+            createNew: true,
+            isPartner: true,
+            names: this.partnerToCreate.names,
+            userId: this.partnerToCreate.id
+
+          }
+          this.displayLoginInfo = !this.displayLoginInfo;
+          btnRef.disabled = false;
+        } else if (res != null) {
+          this.loginInfo = { ...res, isPartner: true, createNew: false, names: this.partnerToCreate.names, };
+          this.displayLoginInfo = !this.displayLoginInfo;
+          btnRef.disabled = false;
+        }
+      });
+
+  }
+
+
 
 }

@@ -43,6 +43,7 @@ model employee {
   phoneNumber  String?
   adress       String?
   baseSalary   Decimal
+  isActive     Boolean
   departmentId Int
   department   department @relation(fields: [departmentId], references: [id])
   roleId       Int
@@ -58,16 +59,17 @@ model employee {
 model loginUser {
   userName     String    @id @unique
   userPassword String
-  userId       String    @unique
-  userInfo     employee? @relation(fields: [userId], references: [id])
-  partnerInfo  partner?  @relation(fields: [userId], references: [id])
+  partnerId    String?   @unique
+  employeeId   String?   @unique
+  userInfo     employee? @relation(fields: [employeeId], references: [id])
+  partnerInfo  partner?  @relation(fields: [partnerId], references: [id])
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
 }
 
 model admin {
   id           String  @id @default(uuid())
-  username     String  @unique
+  userName     String  @unique
   password     String
   pageOwner    Boolean
   adminName    String

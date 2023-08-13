@@ -13,7 +13,9 @@ const httpOptions = {
     }
 }
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class PartnerService {
     partners$ubject: Subject<any> = new Subject();
     subscriptions: Subscription[] = [];
@@ -29,6 +31,18 @@ export class PartnerService {
                     this.partners$ubject.next(res);
                 }
             })
+        )
+    }
+
+    getPartnersBussinessess(_id: string) {
+        this.http.post(`${this.apiUrl}bussiness/bussiness-by-partner`, JSON.stringify({ id: _id }), httpOptions).subscribe(
+            res => {
+                if (res) {
+                    console.log('Bussinesses: ', res);
+                }
+            }, (error) => {
+                console.log(error);
+            }
         )
     }
 

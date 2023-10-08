@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Bussiness } from '../bussiness.model';
+import { Bussiness } from '../../../shared/models/bussiness.model';
 import { BussinessService } from '../bussiness.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';

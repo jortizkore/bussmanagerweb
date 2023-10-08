@@ -33,6 +33,7 @@ export class LoginComponent implements OnInit {
     loginService.login$ubject.subscribe(res => {
       if (res) {
         this.loggedUser = res;
+        AuthService.addUserLogged(res);
         localStorage.setItem('loggedUser', JSON.stringify(res));
         if (this.loggedUser.isAdmin) {
           router.navigate(['admin-home']);

@@ -3,7 +3,8 @@ import { Injectable } from "@angular/core";
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import { environment } from "apps/buss-manager-client/src/environments/environment";
 import { Subject, Subscription } from "rxjs";
-import { Bussiness } from "./bussiness.model";
+import { Bussiness } from "../../shared/models/bussiness.model";
+import { Partner } from "../partners/partner.model";
 
 const httpOptions = {
     headers: {
@@ -24,6 +25,17 @@ export class BussinessService {
     }
 
     getBussiness() {
+        this.subscriptions.push(
+            this.http.get(`${this.apiUrl}bussiness/bussiness`).subscribe(res => {
+                if (res) {
+                    this.bussiness$ubject.next(res);
+                }
+            })
+        )
+    }
+
+    // todo: create endipount to get from partners
+    getBussinessFromUser(partner: Partner) {
         this.subscriptions.push(
             this.http.get(`${this.apiUrl}bussiness/bussiness`).subscribe(res => {
                 if (res) {

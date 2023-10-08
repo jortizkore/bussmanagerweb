@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { LoginService } from '../loginService';
-import { loginUser } from '@prisma/client';
-import { UserLogin } from './userLogin.model';
+import { UserLogin } from '../../../shared/models/userLogin.model';
 
 @Component({
   selector: 'bmw-create-logins',

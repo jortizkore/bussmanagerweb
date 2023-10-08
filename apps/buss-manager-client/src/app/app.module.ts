@@ -29,6 +29,8 @@ import { SellsComponent } from './pages/sells/sells.component';
 import { PurchasesComponent } from './pages/purchases/purchases.component';
 import { DepartmentsComponent } from './maintenance/departments/departments.component';
 import { AdminComponent } from './maintenance/admin/admin.component';
+import { BussinessListCardComponent } from './components/bussiness-list-card/bussiness-list-card.component';
+import { AuthService } from './shared/auth/auth.service';
 
 @NgModule({
   declarations: [
@@ -54,6 +56,7 @@ import { AdminComponent } from './maintenance/admin/admin.component';
     PurchasesComponent,
     DepartmentsComponent,
     AdminComponent,
+    BussinessListCardComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,7 +65,7 @@ import { AdminComponent } from './maintenance/admin/admin.component';
     RouterModule.forRoot(appRoutes, { initialNavigation: 'enabledBlocking' }),
     BrowserAnimationsModule,
   ],
-  providers: [PartnerService, BussinessService, HttpClient, LoginService],
+  providers: [PartnerService, BussinessService, HttpClient, LoginService, AuthService],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

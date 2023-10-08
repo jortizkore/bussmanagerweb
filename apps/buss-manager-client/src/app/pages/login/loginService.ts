@@ -15,6 +15,7 @@ const httpOptions = {
 export class LoginService {
     subscriptions: Subscription[] = [];
     login$ubject: Subject<any> = new Subject();
+    loggedUser: any;
     constructor(private http: HttpClient) {
 
     }
@@ -41,7 +42,6 @@ export class LoginService {
     }
 
     getLoginUserById(id: string) {
-        console.log('requested id: ', id);
         const encodedId = encodeURIComponent(id);
         return this.http.get(`${environment.apiUrl}login/get-login-user-by-id?id=${encodedId}`, httpOptions);
     }

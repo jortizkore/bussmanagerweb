@@ -1,1 +1,6 @@
 <h1>Welcome to partners dashboard</h1>
+
+<bmw-bussiness-list-card
+  *ngIf="loggedUser.bussiness"
+  [bussinessList]="loggedUser.bussiness"
+></bmw-bussiness-list-card>

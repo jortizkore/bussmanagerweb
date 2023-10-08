@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { Bussiness } from './bussiness.model';
+import { Bussiness } from '../../shared/models/bussiness.model';
 import { BussinessService } from './bussiness.service';
 import { BussinessColumns } from './bussiness-columns';
 

@@ -1,4 +1,4 @@
-import { Bussiness } from "./bussiness.model";
+import { Bussiness } from "../../shared/models/bussiness.model";
 
 export const BussinessColumns = [
     {

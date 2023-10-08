@@ -1,0 +1,9 @@
+<div class="bussiness-list-container">
+  <h2>Select a company</h2>
+  <mat-card *ngFor="let buss of bussinessList">
+    <mat-card-title>{{ buss.bussinessName }}</mat-card-title>
+    <mat-card-content
+      >Status: {{ buss.isActive ? 'Active' : 'Deactive' }}</mat-card-content
+    >
+  </mat-card>
+</div>

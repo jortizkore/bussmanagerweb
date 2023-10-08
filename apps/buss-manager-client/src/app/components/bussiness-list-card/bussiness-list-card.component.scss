@@ -1,0 +1,21 @@
+.bussiness-list-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  justify-content: center;
+
+  h2 {
+    align-self: center;
+  }
+}
+
+mat-card {
+  width: 40%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  padding-left: 20px;
+  padding-top: 10px;
+}

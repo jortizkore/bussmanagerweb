@@ -5,6 +5,7 @@ import { Partner } from "./partner.model";
 // TODO: eslint-disable-next-line @nx/enforce-module-boundaries
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import { environment } from "apps/buss-manager-client/src/environments/environment";
+import { Bussiness } from "../../shared/models/bussiness.model";
 
 
 const httpOptions = {
@@ -18,6 +19,7 @@ const httpOptions = {
 })
 export class PartnerService {
     partners$ubject: Subject<any> = new Subject();
+    partnerBuss$ubject: Subject<any> = new Subject();
     subscriptions: Subscription[] = [];
     apiUrl = environment.apiUrl;
 
@@ -39,6 +41,7 @@ export class PartnerService {
             res => {
                 if (res) {
                     console.log('Bussinesses: ', res);
+                    this.partnerBuss$ubject.next(res);
                 }
             }, (error) => {
                 console.log(error);
@@ -47,7 +50,6 @@ export class PartnerService {
     }
 
     createPartner(partner: Partner) {
-        console.log('FE partner: ', partner);
         this.http.post(`${this.apiUrl}partner/partner`, JSON.stringify(partner), httpOptions).subscribe(
             res => {
                 if (res) {

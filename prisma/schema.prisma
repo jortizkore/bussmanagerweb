@@ -73,7 +73,7 @@ model admin {
   password     String
   pageOwner    Boolean
   adminName    String
-  adminIdNumer String
+  adminIdNumber String @default("")
   adminPhone   String
 }
 
@@ -84,7 +84,7 @@ model bussiness {
   address       String?
   RNC           String?
   ownerId       String
-  isActive      Boolean        @default(true)
+  isActive      Boolean        @default(false)
   employees     employee[]
   owner         partner        @relation(fields: [ownerId], references: [id])
   products      product[]

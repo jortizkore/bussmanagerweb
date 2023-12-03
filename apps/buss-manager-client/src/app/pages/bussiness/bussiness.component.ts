@@ -1,15 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Bussiness } from '../../shared/models/bussiness.model';
 import { BussinessService } from './bussiness.service';
 import { BussinessColumns } from './bussiness-columns';
+import { AuthService } from '../../shared/auth/auth.service';
+import { NotificationService } from '../../shared/services/notification.service';
 
 @Component({
   selector: 'bmw-bussiness',
   templateUrl: './bussiness.component.html',
   styleUrls: ['./bussiness.component.scss'],
 })
-export class BussinessComponent {
+export class BussinessComponent implements OnInit {
 
   subscriptions: Subscription[] = [];
   bussinessList: Bussiness[] = [];
@@ -21,21 +23,28 @@ export class BussinessComponent {
   rnc = '';
   status = true;
 
-  constructor(private bussinessService: BussinessService) {
+  //services
+  authService = inject(AuthService);
+  bussinessService = inject(BussinessService);
+  notificationService = inject(NotificationService);
+
+  constructor() {
     this.bussinessColumnDef = BussinessColumns;
 
-    bussinessService.getBussiness();
+    this.bussinessService.getBussiness();
 
     this.subscriptions.push(
-      bussinessService.bussiness$ubject.subscribe(res => {
+      this.bussinessService.bussiness$ubject.subscribe(res => {
         if (res) {
           this.bussinessList = res;
           this.filteredResults = this.bussinessList;
         }
       })
     );
+  }
 
-
+  ngOnInit(): void {
+    this.authService.verifyLoggedUser();
   }
   search() {
     const haveSearchValues = this.name.trim().length > 0 || this.rnc.trim().length > 0;

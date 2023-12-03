@@ -31,6 +31,7 @@ import { DepartmentsComponent } from './maintenance/departments/departments.comp
 import { AdminComponent } from './maintenance/admin/admin.component';
 import { BussinessListCardComponent } from './components/bussiness-list-card/bussiness-list-card.component';
 import { AuthService } from './shared/auth/auth.service';
+import { NotificationService } from './shared/services/notification.service';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,7 @@ import { AuthService } from './shared/auth/auth.service';
     RouterModule.forRoot(appRoutes, { initialNavigation: 'enabledBlocking' }),
     BrowserAnimationsModule,
   ],
-  providers: [PartnerService, BussinessService, HttpClient, LoginService, AuthService],
+  providers: [PartnerService, BussinessService, HttpClient, LoginService, AuthService, NotificationService],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

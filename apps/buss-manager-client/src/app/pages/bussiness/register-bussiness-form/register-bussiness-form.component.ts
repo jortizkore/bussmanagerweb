@@ -1,8 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { Bussiness } from '../../../shared/models/bussiness.model';
 import { BussinessService } from '../bussiness.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { AuthService } from '../../../shared/auth/auth.service';
 
 @Component({
   selector: 'bmw-register-bussiness-form',
@@ -10,6 +11,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./register-bussiness-form.component.scss'],
 })
 export class RegisterBussinessFormComponent implements OnInit, OnDestroy {
+
+  // Services
+  authService = inject(AuthService);
 
   subscriptions: Subscription[] = [];
   removeBussiness = false;
@@ -19,7 +23,7 @@ export class RegisterBussinessFormComponent implements OnInit, OnDestroy {
     address: '',
     RNC: '',
     isActive: false,
-    ownerId: '9b044f41-e711-4cf1-985e-419f103c5607',
+    ownerId: this.authService.loggedUser?.partnerId,
   }
   constructor(private bussinessService: BussinessService, private router: Router) {
     const update = localStorage.getItem('bussinessToUpdate');

@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { AuthService } from '../../shared/auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'bmw-omni-menu',
@@ -6,6 +8,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./omni-menu.component.scss'],
 })
 export class OmniMenuComponent {
+
+  loginBtnText = 'Login';
 
   routesToDisplay = [{
     title: 'My Bussiness',
@@ -17,6 +21,21 @@ export class OmniMenuComponent {
   }
   ];
 
+  // Services
+  authService = inject(AuthService);
+  router = inject(Router);
+
+
+  isUserLogged = () => {
+    return this.authService.isUserLoggedIn;
+  }
+
+  logInBtnClicked() {
+    if(this.isUserLogged()) {
+      this.authService.logOut();
+    }
+    this.router.navigate(['login-page']);
+  }
 
   getUserRoutes() {
     // depending on logged users roles will load a list of this user to access

@@ -1,62 +1,113 @@
 
-import { Injectable } from "@angular/core";
+import { Injectable, inject } from "@angular/core";
 import { authenticatedUser } from "./authenticated-user.model";
+import { Router } from "@angular/router";
+import { NotificationService } from "../services/notification.service";
 
 
 @Injectable()
 export class AuthService {
 
-    static isUserLoggedIn = false;
-    static loggedUser: authenticatedUser = {
-        id: "",
-        partnerId: "",
-        adminName: "",
-        userId: "",
-        userName: "",
-        userRoles: [],
-        names: "",
-        isAdmin: false,
-        isPartner: false
-    };
+    isUserLoggedIn = false;
+    loggedUser: authenticatedUser | null = null;
+    //static router = inject(Router);
 
-    constructor() {
+    // Services
+    notificationsService = inject(NotificationService);
+
+    constructor(public router: Router) {
         //console.log
     }
 
-    static verifyLoggedUser() {
-        const user = sessionStorage.getItem('loggedUser');
-        if (user !== null) {
-            console.log('hit');
-            AuthService.loggedUser = JSON.parse(user);
-            console.log(AuthService.loggedUser);
-            AuthService.isUserLoggedIn = true;
-        }
-        AuthService.isUserLoggedIn = false;
+    setLoggedUser(_loggedUser: any) {
+        this.loggedUser = _loggedUser;
     }
 
-    static addUserLogged(user: any) {
-        this.loggedUser.userId = user?.userId;
-        this.loggedUser.userName = user?.userName;
-        this.loggedUser.userRoles = user?.userRoles;
-        this.loggedUser.isAdmin = user?.isAdmin;
-        this.loggedUser.isPartner = user?.isPartner;
-        this.loggedUser.id = user?.id;
-        this.loggedUser.partnerId = user?.partnerId;
-        this.loggedUser.names = user?.names;
-        this.loggedUser.adminName = user?.adminName;
-        this.isUserLoggedIn = true;
+    verifyLoggedUser() {
+        this.getSessionUser();
 
+        console.log(this.loggedUser);
+        if (this.loggedUser !== null) {
+            console.log('hit');
+            console.log(this.loggedUser);
+            this.isUserLoggedIn = true;
+        } else {
+            this.notificationsService.showAlertMessage('Login needed', 'You need to be logged to access this view');
+            this.router.navigate(['login-page']);
+        }
+    }
+
+    verifyIfAdmin() {
+        this.verifyLoggedUser()
+        if (this.loggedUser?.isAdmin) {
+            return;
+        }
+        this.notificationsService.showAlertMessage('Login needed', 'You need to be admin to access this view');
+        this.router.navigate(['']);
+    }
+
+    getSessionUser() {
+        const user = sessionStorage.getItem('loggedUser');
+
+        if (user != null)
+            this.loggedUser = JSON.parse(user);
+    }
+
+    addUserLogged(user: any) {
+
+        this.loggedUser = {
+            userId: user.userId,
+            userName: user?.userName,
+            userRoles: user?.userRoles,
+            isAdmin: user?.isAdmin,
+            isPartner: user.partnerId ? true : false,
+            id: user?.id,
+            partnerId: user?.partnerId,
+            names: user?.names,
+            adminName: user?.adminName
+        }
+
+        this.isUserLoggedIn = true;
         sessionStorage.setItem('loggedUser', JSON.stringify(this.loggedUser));
     }
 
-    static logOut() {
+    logOut() {
         this.isUserLoggedIn = false;
+        this.loggedUser = null;
         sessionStorage.removeItem('loggedUser');
     }
 
-    static getLoggedUser = () => {
-        AuthService.verifyLoggedUser();
-        return AuthService.isUserLoggedIn ? AuthService.loggedUser : null
+    getLoggedUser = () => {
+        this.verifyLoggedUser();
+        return this.isUserLoggedIn ? this.loggedUser : null
     };
+
+    createFakeAdminUser() {
+        this.loggedUser = {
+            id: "asdasd-asdasdasd-asdasdasd-asdasdasdasd",
+            partnerId: "",
+            adminName: "BMW-admin",
+            userId: "0",
+            userName: "No-user-name-Needed",
+            userRoles: ['Administrator'],
+            names: "admin",
+            isAdmin: true,
+            isPartner: false
+        };
+    }
+
+    createFakePartnerUser() {
+        this.loggedUser = {
+            id: "asdasd-asdasdasd-asdasdasd-asdasdasdasd",
+            partnerId: "",
+            adminName: "BMW-partner",
+            userId: "0",
+            userName: "No-user-name-Needed",
+            userRoles: ['Partner'],
+            names: "partner",
+            isAdmin: false,
+            isPartner: true
+        };
+    }
 
 }

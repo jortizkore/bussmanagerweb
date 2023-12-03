@@ -5,7 +5,7 @@ export interface Bussiness {
     address: string,
     RNC?: string,
     isActive: boolean
-    ownerId: string
+    ownerId: string | undefined
     createdAt?: string,
     updatedAt?: string
 

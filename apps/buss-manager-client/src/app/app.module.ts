@@ -32,6 +32,7 @@ import { AdminComponent } from './maintenance/admin/admin.component';
 import { BussinessListCardComponent } from './components/bussiness-list-card/bussiness-list-card.component';
 import { AuthService } from './shared/auth/auth.service';
 import { NotificationService } from './shared/services/notification.service';
+import { BussinessDashboardComponent } from './pages/bussiness-dashboard/bussiness-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { NotificationService } from './shared/services/notification.service';
     DepartmentsComponent,
     AdminComponent,
     BussinessListCardComponent,
+    BussinessDashboardComponent,
   ],
   imports: [
     BrowserModule,
@@ -66,7 +68,14 @@ import { NotificationService } from './shared/services/notification.service';
     RouterModule.forRoot(appRoutes, { initialNavigation: 'enabledBlocking' }),
     BrowserAnimationsModule,
   ],
-  providers: [PartnerService, BussinessService, HttpClient, LoginService, AuthService, NotificationService],
+  providers: [
+    PartnerService,
+    BussinessService,
+    HttpClient,
+    LoginService,
+    AuthService,
+    NotificationService,
+  ],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

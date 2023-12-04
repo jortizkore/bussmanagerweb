@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { AuthService } from '../../shared/auth/auth.service';
 import { Router } from '@angular/router';
+import { adminRoutes } from './omni-menu-routes';
 
 @Component({
   selector: 'bmw-omni-menu',
@@ -11,15 +12,7 @@ export class OmniMenuComponent {
 
   loginBtnText = 'Login';
 
-  routesToDisplay = [{
-    title: 'My Bussiness',
-    route: 'bussiness'
-  },
-  {
-    title: 'View partners',
-    route: 'partners'
-  }
-  ];
+  adminRoutes = adminRoutes;
 
   // Services
   authService = inject(AuthService);

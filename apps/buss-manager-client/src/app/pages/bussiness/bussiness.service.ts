@@ -16,12 +16,25 @@ const httpOptions = {
 export class BussinessService {
     subscriptions: Subscription[] = [];
     bussiness$ubject: Subject<any> = new Subject();
+    selectedBussiness: Bussiness | null = null;
+
     apiUrl = environment.apiUrl;
 
 
 
     constructor(private http: HttpClient) {
 
+    }
+
+    getCurrentSelectedBussiness() {
+        const bussinessInMemory = sessionStorage.getItem('selectedBussiness');
+
+        if (bussinessInMemory != null) {
+            this.selectedBussiness = JSON.parse(bussinessInMemory);
+            return this.selectedBussiness;
+        }
+        this.selectedBussiness = null;
+        return this.selectedBussiness;
     }
 
     getBussiness() {
@@ -34,19 +47,9 @@ export class BussinessService {
         )
     }
 
-    // todo: create endipount to get from partners
-    getBussinessFromUser(partner: Partner) {
-        this.subscriptions.push(
-            this.http.get(`${this.apiUrl}bussiness/bussiness`).subscribe(res => {
-                if (res) {
-                    this.bussiness$ubject.next(res);
-                }
-            })
-        )
-    }
+    // To get partners bussiness go to partners service
 
     createBussiness(bussiness: Bussiness) {
-        console.log('FE bussiness: ', bussiness);
         this.http.post(`${this.apiUrl}bussiness/bussiness`, JSON.stringify(bussiness), httpOptions).subscribe(
             res => {
                 if (res) {
@@ -58,7 +61,6 @@ export class BussinessService {
         )
     }
     updateBussiness(bussiness: Bussiness) {
-        console.log('FE bussiness: ', bussiness);
         this.http.patch(`${this.apiUrl}bussiness/bussiness`, JSON.stringify(bussiness), httpOptions).subscribe(
             res => {
                 if (res) {

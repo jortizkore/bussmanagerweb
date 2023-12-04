@@ -13,7 +13,7 @@ export class AuthService {
     //static router = inject(Router);
 
     // Services
-    notificationsService = inject(NotificationService);
+    private notificationsService = inject(NotificationService);
 
     constructor(public router: Router) {
         //console.log
@@ -42,7 +42,7 @@ export class AuthService {
         if (this.loggedUser?.isAdmin) {
             return;
         }
-        this.notificationsService.showAlertMessage('Login needed', 'You need to be admin to access this view');
+        this.notificationsService.showAlertMessage('Admin restricted view', 'You need to be admin to access this view');
         this.router.navigate(['']);
     }
 

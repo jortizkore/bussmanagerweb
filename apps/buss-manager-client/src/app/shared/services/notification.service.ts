@@ -31,23 +31,23 @@ export class NotificationService {
         })
     }
 
-    showQuestion(title: string, message: string, confirmButtonText = null) {
+    showQuestion(title: string, message: string, okCallBack: any) {
         Swal.fire({
             title: title,
             text: message,
             icon: 'question',
-            confirmButtonText: confirmButtonText ? confirmButtonText : 'Ok',
+            confirmButtonText: 'Proceed',
+            showConfirmButton: true,
             showCancelButton: true,
         }).then((result) => {
             if (result.isConfirmed) {
-                return true;
-            } else {
+                okCallBack();
+            } else if (result.dismiss) {
                 Swal.fire({
                     title: title,
                     text: 'Operation cancelled',
                     confirmButtonText: 'Ok'
                 });
-                return false;
             }
         })
     }

@@ -1,0 +1,17 @@
+<mat-drawer-container class="drawer-container" autosize>
+    <mat-drawer #drawer class="bussiness-sidenav" mode="side" [opened]="true">
+        <div class="sidenav-item" *ngFor="let route of bussinessMenuItems">
+            <mat-icon>{{route.icon}}</mat-icon>
+            <span>{{route.label}}</span>
+        </div>
+    </mat-drawer>
+
+    <button mat-icon-button (click)="drawer.toggle()">
+        <!-- <mat-icon *ngIf="!drawer.opened">menu</mat-icon> -->
+        <mat-icon *ngIf="!drawer.opened" aria-label='Open sidenav' color='primary'>keyboard_arrow_right
+        </mat-icon>
+        <mat-icon *ngIf="drawer.opened" aria-label='Open sidenav' color='primary'>keyboard_arrow_left
+        </mat-icon>
+    </button>
+
+</mat-drawer-container>

@@ -1,9 +1,10 @@
-import { Component, OnDestroy, OnInit, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { Bussiness } from '../../../shared/models/bussiness.model';
 import { BussinessService } from '../bussiness.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../shared/auth/auth.service';
+import { NotificationService } from '../../../shared/services/notification.service';
 
 @Component({
   selector: 'bmw-register-bussiness-form',
@@ -14,6 +15,8 @@ export class RegisterBussinessFormComponent implements OnInit, OnDestroy {
 
   // Services
   authService = inject(AuthService);
+  notificationService = inject(NotificationService);
+  bussinessService = inject(BussinessService);
 
   subscriptions: Subscription[] = [];
   removeBussiness = false;
@@ -25,7 +28,7 @@ export class RegisterBussinessFormComponent implements OnInit, OnDestroy {
     isActive: false,
     ownerId: this.authService.loggedUser?.partnerId,
   }
-  constructor(private bussinessService: BussinessService, private router: Router) {
+  constructor(private router: Router) {
     const update = localStorage.getItem('bussinessToUpdate');
     let remove: any = {};
     this.removeBussiness = localStorage.getItem('bussinessToDelete') ? true : false;
@@ -64,17 +67,14 @@ export class RegisterBussinessFormComponent implements OnInit, OnDestroy {
 
   deactivate() {
     const confirmMessage = this.bussiness.isActive ? 'This bussiness will be deactivated' : 'This bussiness will be activate';
-    const confirmation = confirm(confirmMessage);
-    if (confirmation === true) {
+    this.notificationService.showQuestion('Confirm action', confirmMessage, () => {
       this.bussiness.isActive = !this.bussiness.isActive;
       this.bussinessService.updateBussiness(this.bussiness);
-      this.bussiness.isActive ? alert('Bussiness activated') : alert('Bussiness deactivated');
+      this.bussiness.isActive ? this.notificationService.showInfoMessage('Done', 'Bussiness activated') : this.notificationService.showInfoMessage('Done', 'Bussiness deactivated');
       localStorage.removeItem('bussinessToDelete');
-    } else {
-      alert('No changes made');
       localStorage.removeItem('bussinessToDelete');
-    }
-    this.goToBussinessView();
+      this.goToBussinessView();
+    });
   }
 
   goToBussinessView() {

@@ -8,17 +8,19 @@ import { RegisterBussinessFormComponent } from './pages/bussiness/register-bussi
 import { CreateLoginsComponent } from './pages/login/create-logins/create-logins.component';
 import { PartnerDasboardComponent } from './pages/partner-dasboard/partner-dasboard.component';
 import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
+import { BussinessDashboardComponent } from './pages/bussiness-dashboard/bussiness-dashboard.component';
 
 export const appRoutes: Route[] = [
     { path: '', title: 'Home', component: HomeComponent },
-    { path: 'partner-home', title: 'Create user', component: PartnerDasboardComponent },
-    { path: 'admin-home', title: 'Create user', component: AdminDashboardComponent },
+    { path: 'partner-home', title: 'Partner home', component: PartnerDasboardComponent },
+    { path: 'admin-home', title: 'Admin dashboard', component: AdminDashboardComponent },
     //
-    { path: 'bussiness', title: 'Log in', component: BussinessComponent },
-    { path: 'partners', title: 'Log in', component: PartnersComponent },
+    { path: 'bussiness', title: 'Bussiness', component: BussinessComponent },
+    { path: 'partners', title: 'Partner', component: PartnersComponent },
     { path: 'login-page', title: 'Log in', component: LoginComponent },
     { path: 'register-partner', title: 'Register as a partner!', component: RegisterPartnerFormComponent },
     { path: 'register-bussiness', title: 'Register a bussiness!', component: RegisterBussinessFormComponent },
-    { path: 'register-login-user', title: 'Create user', component: CreateLoginsComponent },
+    { path: 'register-login-user', title: 'Register login info!', component: CreateLoginsComponent },
+    { path: 'bussiness-dashboard', title: 'Bussiness dashboard', component: BussinessDashboardComponent },
 
 ];

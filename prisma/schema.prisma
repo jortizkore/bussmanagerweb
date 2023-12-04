@@ -93,7 +93,8 @@ model bussiness {
   accounts      accounts[]
   providers     provider[]
   accountsToPay accountToPay[]
-  client        client[]
+  clients        client[]
+  expendableMaterials expendableMaterial[]
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
 }
@@ -277,4 +278,14 @@ model payment {
   accountToReceive   accountsToReceive @relation(fields: [accountToReceiveId], references: [id])
   createdAt          DateTime          @default(now())
   updatedAt          DateTime          @updatedAt
+}
+
+model expendableMaterial {
+  id Int @id @default(autoincrement())
+  description String @unique
+  quantity Int 
+  bussinessId String
+  bussiness bussiness @relation(fields: [bussinessId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

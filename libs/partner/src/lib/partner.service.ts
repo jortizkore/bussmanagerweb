@@ -28,7 +28,7 @@ export class PartnerService {
   }
 
   public async updatePartner(partner: any) {
-    const updatedPartner = prisma.partner.update(
+    const updatedPartner = await prisma.partner.update(
       {
         where: {
           id: partner.id,

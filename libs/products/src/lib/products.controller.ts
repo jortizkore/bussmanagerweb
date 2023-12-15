@@ -7,15 +7,16 @@ export class ProductsController {
   constructor(private productsService: ProductsService) { }
 
 
-  @Get('/products?bussinessId')
-  public async getBussinessProducts(@Query() bussinessId: string) {
+  @Get('/products?:bussinessId')
+  public async getBussinessProducts(@Query('bussinessId') bussinessId: string) {
     return await this.productsService.getAllBussinessProducts(bussinessId);
   }
-
-  @Get('/products?bussinessId&?type')
-  public async getBussinessProductsByType(@Query() bussinessId: string, @Query() type: number) {
-    return await this.productsService.getAllBussinessProductsByCathegory(bussinessId, type);
-  }
+  // TODO: MOVE THIS TO PRODUCT TYPE .getProdycts() to take advantage of prisma
+  // @Get('/products?:bussinessId&type')
+  // public async getBussinessProductsByType(@Query('bussinessId') bussinessId: string, @Query('type') type: number) {
+  //   console.log(bussinessId, type);
+  //   return await this.productsService.getAllBussinessProductsByCathegory(bussinessId, type);
+  // }
 
   @Post('/products')
   public addProduct(@Body() product: product) {

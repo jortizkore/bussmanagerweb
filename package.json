@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "dev": "concurrently \"nx run buss-manager-api:serve\" \"nx run buss-manager-client:serve -o\""
+    "dev": "concurrently \"nx run buss-manager-api:serve\" \"nx run buss-manager-client:serve -o\"",
+    "api": "nx run buss-manager-api:serve",
+    "client": "nx run buss-manager-client:serve"
   },
   "private": true,
   "dependencies": {

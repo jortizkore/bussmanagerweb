@@ -16,8 +16,8 @@ export class ProductsService {
         return product;
     }
 
-    getAllBussinessProducts(_bussinessId: string): Promise<product[]> {
-        return prisma.product.findMany({
+    public async getAllBussinessProducts(_bussinessId: string): Promise<product[]> {
+        return await prisma.product.findMany({
             where: {
                 bussinessId: _bussinessId
             }
@@ -34,7 +34,7 @@ export class ProductsService {
     }
 
     public async saveProduct(product: any) {
-        return await prisma.product.create(product);
+        return await prisma.product.create({ data: product });
     }
 
     public async updateProduct(product: any) {

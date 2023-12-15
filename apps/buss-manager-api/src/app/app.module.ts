@@ -8,6 +8,8 @@ import { JwtModule } from '@nestjs/jwt'
 import { environment } from '../../../../environments/environment';
 import { LoginController, LoginService } from '@buss-manager-web/login';
 import { AuthService } from '@buss-manager-web/auth-service';
+import { ProductsController, ProductsService } from '@buss-manager-web/products';
+import { ProductTypeController, ProductTypeService } from '@buss-manager-web/product-type';
 
 
 
@@ -20,7 +22,7 @@ import { AuthService } from '@buss-manager-web/auth-service';
       },
     }),
   ],
-  controllers: [AppController, PartnerController, BussinessController, LoginController],
-  providers: [AppService, PartnerService, BussinessService, LoginService, AuthService],
+  controllers: [AppController, PartnerController, BussinessController, LoginController, ProductsController, ProductTypeController],
+  providers: [AppService, PartnerService, BussinessService, LoginService, AuthService, ProductsService, ProductTypeService],
 })
 export class AppModule { }

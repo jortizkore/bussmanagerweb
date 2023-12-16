@@ -73,7 +73,7 @@ model admin {
   password     String
   pageOwner    Boolean
   adminName    String
-  adminIdNumer String
+  adminIdNumber String @default("")
   adminPhone   String
 }
 
@@ -84,7 +84,7 @@ model bussiness {
   address       String?
   RNC           String?
   ownerId       String
-  isActive      Boolean        @default(true)
+  isActive      Boolean        @default(false)
   employees     employee[]
   owner         partner        @relation(fields: [ownerId], references: [id])
   products      product[]
@@ -93,7 +93,8 @@ model bussiness {
   accounts      accounts[]
   providers     provider[]
   accountsToPay accountToPay[]
-  client        client[]
+  clients        client[]
+  expendableMaterials expendableMaterial[]
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
 }
@@ -277,4 +278,14 @@ model payment {
   accountToReceive   accountsToReceive @relation(fields: [accountToReceiveId], references: [id])
   createdAt          DateTime          @default(now())
   updatedAt          DateTime          @updatedAt
+}
+
+model expendableMaterial {
+  id Int @id @default(autoincrement())
+  description String @unique
+  quantity Int 
+  bussinessId String
+  bussiness bussiness @relation(fields: [bussinessId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

@@ -1,8 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { PartnerService } from './partner.service';
 import { Subscription } from 'rxjs';
 import { Partner } from './partner.model';
 import { PartnerColumns } from './partnerColumns'
+import { AuthService } from '../../shared/auth/auth.service';
 
 @Component({
   selector: 'bmw-partners',
@@ -13,18 +14,19 @@ export class PartnersComponent implements OnInit, OnDestroy {
   subscriptions: Subscription[] = [];
   partners: Partner[] = [];
   filteredResults: Partner[] = [];
-  partnersColumnDef: any[] = [];
+  partnersColumnDef = PartnerColumns
 
   //filter variables
   name = '';
   idNumber = '';
   status = true;
 
-
+  // Services
+  authService = inject(AuthService);
 
   constructor(private partnerService: PartnerService) {
 
-    this.partnersColumnDef = PartnerColumns;
+    this.authService.verifyIfAdmin();
 
     partnerService.getPartners();
 

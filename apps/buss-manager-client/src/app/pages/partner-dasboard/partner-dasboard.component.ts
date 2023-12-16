@@ -21,6 +21,7 @@ export class PartnerDasboardComponent implements OnInit {
     )
   }
   ngOnInit(): void {
+    // TODO: stop using local storage with this data, use the auth service logged user instead
     const userInMemory = localStorage.getItem('loggedUser') == null ? {} : localStorage.getItem('loggedUser');
     if (userInMemory) {
       this.loggedUser = JSON.parse(userInMemory.toString());

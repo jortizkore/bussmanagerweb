@@ -1,0 +1,27 @@
+.drawer-container {
+  height: 100%;
+  background-color: white;
+  padding: 1em 1em 1em 0em;
+}
+
+.bussiness-sidenav {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidenav-item {
+  height: 30px;
+  padding: 1em 1em 1em 0.5em;
+  margin: 5px 0px 5px 0px;
+  display: flex;
+  span {
+    margin-left: 1em;
+  }
+}
+
+.sidenav-item:hover {
+  background-color: blue;
+  font-size: medium;
+  font-weight: 500;
+  color: white;
+}

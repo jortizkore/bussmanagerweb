@@ -5,5 +5,8 @@
     <mat-card-content
       >Status: {{ buss.isActive ? 'Active' : 'Deactive' }}</mat-card-content
     >
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="selectBussiness(buss)">Go!</button>
+    </mat-card-actions>
   </mat-card>
 </div>

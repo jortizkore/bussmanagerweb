@@ -27,21 +27,19 @@ export class LoginComponent implements OnInit {
   selectedCompany: string | undefined | null = undefined;
   //
 
-  constructor(private loginService: LoginService, private router: Router) {
+  constructor(private loginService: LoginService, private router: Router, private authService: AuthService) {
     //this.selectedCompany = localStorage.getItem('selectedCompany');
     //TODO ADD subscriptions array
     loginService.login$ubject.subscribe(res => {
       if (res) {
         this.loggedUser = res;
-        AuthService.addUserLogged(res);
+        authService.addUserLogged(res);
         localStorage.setItem('loggedUser', JSON.stringify(res));
         if (this.loggedUser.isAdmin) {
           router.navigate(['admin-home']);
         } else if (this.loggedUser.partnerId) {
-
           router.navigate(['partner-home']);
         }
-
       }
     });
   }
@@ -58,8 +56,9 @@ export class LoginComponent implements OnInit {
     }
     this.loginService.logInUser(loginBody);
   }
-  setAdminStatus(status: any) {
-    this.isAdmin = status.checked;
+
+  setAdminStatus(adminCheck: any) {
+    this.isAdmin = adminCheck.checked;
   }
 
 }

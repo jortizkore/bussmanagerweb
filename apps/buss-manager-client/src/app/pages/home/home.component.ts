@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { AuthService } from '../../shared/auth/auth.service';
 import { Router } from '@angular/router';
 
@@ -9,13 +9,14 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent {
   loggedUser: any;
+  authService = inject(AuthService)
   constructor(private router: Router) {
-    this.loggedUser = AuthService.getLoggedUser();
+    this.loggedUser = this.authService.getLoggedUser();
 
-    if (AuthService.loggedUser?.isAdmin)
+    if (this.authService.loggedUser?.isAdmin)
       router.navigate(['/admin-home']);
 
-    if (AuthService.loggedUser?.partnerId)
+    if (this.authService.loggedUser?.partnerId)
       router.navigate(['partner-home']);
   }
 }

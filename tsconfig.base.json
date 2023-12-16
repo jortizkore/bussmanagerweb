@@ -21,7 +21,9 @@
       "@buss-manager-web/employee": ["libs/employee/src/index.ts"],
       "@buss-manager-web/jwt-srvice": ["libs/jwt-srvice/src/index.ts"],
       "@buss-manager-web/login": ["libs/login/src/index.ts"],
-      "@buss-manager-web/partner": ["libs/partner/src/index.ts"]
+      "@buss-manager-web/partner": ["libs/partner/src/index.ts"],
+      "@buss-manager-web/product-type": ["libs/product-type/src/index.ts"],
+      "@buss-manager-web/products": ["libs/products/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

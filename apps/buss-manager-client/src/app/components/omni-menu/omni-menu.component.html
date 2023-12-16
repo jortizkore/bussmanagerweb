@@ -1,10 +1,7 @@
 <mat-toolbar>
   <span routerLink="">Buss Manager</span>
 
-  <span
-    routerLink="{{ element.route }}"
-    *ngFor="let element of routesToDisplay"
-  >
+  <span routerLink="{{ element.route }}" *ngFor="let element of adminRoutes">
     {{ element.title }}
   </span>
 
@@ -13,11 +10,11 @@
 
   <span style="flex-grow: 1"></span>
   <div class="menu-button-conntainer">
-    <button mat-flat-button color="primary" routerLink="login-page">
-      Log in <mat-icon>person</mat-icon>
+    <button mat-flat-button color="primary" (click)="logInBtnClicked()">
+      {{ !isUserLogged()? 'Log in' : 'Log out' }} <mat-icon>person</mat-icon>
     </button>
 
-    <button routerLink="register-partner" mat-flat-button color="warn">
+    <button *ngIf="!isUserLogged()" routerLink="register-partner" mat-flat-button color="primary">
       Become a partner!<mat-icon>person_add</mat-icon>
     </button>
   </div>

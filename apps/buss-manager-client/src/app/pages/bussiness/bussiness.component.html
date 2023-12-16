@@ -1,25 +1,11 @@
 <div class="filter-container">
   <mat-form-field appearance="outline">
-    <input
-      matInput
-      type="text"
-      placeholder="Company Name"
-      id="name"
-      [(ngModel)]="name"
-      (blur)="search()"
-    />
+    <input matInput type="text" placeholder="Company Name" id="name" [(ngModel)]="name" (blur)="search()" />
     <mat-label>Company Name</mat-label>
   </mat-form-field>
 
   <mat-form-field appearance="outline">
-    <input
-      matInput
-      type="text"
-      placeholder="RNC"
-      id="RNC"
-      [(ngModel)]="rnc"
-      (blur)="search()"
-    />
+    <input matInput type="text" placeholder="RNC" id="RNC" [(ngModel)]="rnc" (blur)="search()" />
     <mat-label>RNC</mat-label>
   </mat-form-field>
   <mat-form-field appearance="outline">
@@ -28,7 +14,12 @@
       <mat-option [value]="false">Deactivated</mat-option>
     </mat-select>
   </mat-form-field>
+  <!-- PUSH THIS ITEMS TO THE RIGHT -->
+  <span style="flex-grow: 1"></span>
+  <button mat-flat-button color="primary" routerLink="../register-bussiness">Add bussiness</button>
 </div>
+
+
 
 <bmw-generic-table [columnDef]="bussinessColumnDef" [data]="filteredResults">
 </bmw-generic-table>

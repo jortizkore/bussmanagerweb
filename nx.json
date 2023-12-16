@@ -2,7 +2,7 @@
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "tasksRunnerOptions": {
     "default": {
-      "runner": "nx-cloud",
+      "runner": "nx/tasks-runenrs/default",
       "options": {
         "cacheableOperations": ["build", "lint", "test", "e2e"],
         "accessToken": "ZDJjYjk4N2MtMThiMi00NGE2LWEyOTYtZWU0YTFkY2ExZWQwfHJlYWQtd3JpdGU="

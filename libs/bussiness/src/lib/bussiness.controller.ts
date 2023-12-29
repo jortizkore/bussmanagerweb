@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Patch, Post, Query } from '@nestjs/common';
 import { BussinessService } from './bussiness.service';
 
 @Controller('bussiness')
@@ -10,6 +10,11 @@ export class BussinessController {
   @Get('bussiness')
   public getBussiness() {
     return this.bussinessService.getBussiness();
+  }
+
+  @Get('bussiness-products?:id')
+  public getBussinessProducts(@Query('id') id: string) {
+    return this.bussinessService.getBussinessProducts(id);
   }
 
   // gets a bussiness by id

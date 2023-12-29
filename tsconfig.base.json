@@ -18,12 +18,18 @@
       "@buss-manager-web/[model-name]": ["libs/[model-name]/src/index.ts"],
       "@buss-manager-web/auth-service": ["libs/auth-service/src/index.ts"],
       "@buss-manager-web/bussiness": ["libs/bussiness/src/index.ts"],
+      "@buss-manager-web/clients": ["libs/clients/src/index.ts"],
       "@buss-manager-web/employee": ["libs/employee/src/index.ts"],
+      "@buss-manager-web/expendable-material": [
+        "libs/expendable-material/src/index.ts"
+      ],
       "@buss-manager-web/jwt-srvice": ["libs/jwt-srvice/src/index.ts"],
       "@buss-manager-web/login": ["libs/login/src/index.ts"],
+      "@buss-manager-web/lost": ["libs/lost/src/index.ts"],
       "@buss-manager-web/partner": ["libs/partner/src/index.ts"],
       "@buss-manager-web/product-type": ["libs/product-type/src/index.ts"],
-      "@buss-manager-web/products": ["libs/products/src/index.ts"]
+      "@buss-manager-web/products": ["libs/products/src/index.ts"],
+      "@buss-manager-web/providers": ["libs/providers/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

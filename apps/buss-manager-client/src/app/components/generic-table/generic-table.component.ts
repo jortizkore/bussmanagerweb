@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
@@ -18,7 +18,7 @@ export class GenericTableComponent {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private cdk: ChangeDetectorRef) {
     // TODO I need to do msomething here to avoid lint messages
 
   }
@@ -27,6 +27,7 @@ export class GenericTableComponent {
     this.tableData = new MatTableDataSource<any>(this.data);
     this.tableData.paginator = this.paginator;
     this.columns = this.columnDef.map(cd => cd.columnDef); // todo explicar esta magia a starlin
+    this.cdk.detectChanges();
   }
 
 

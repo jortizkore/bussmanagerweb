@@ -36,7 +36,6 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
-import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthComponent } from './auth/auth.component';
 
@@ -80,7 +79,6 @@ import { AuthComponent } from './auth/auth.component';
     MatToolbarModule,
     MatTooltipModule,
     MatTreeModule,
-    BrowserModule,
     BrowserAnimationsModule,
   ],
   exports: [
@@ -126,4 +124,4 @@ import { AuthComponent } from './auth/auth.component';
     BrowserAnimationsModule,
   ],
 })
-export class MaterialModule {}
+export class MaterialModule { }

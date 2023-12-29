@@ -15,7 +15,14 @@
     </button>
 
     <button *ngIf="!isUserLogged()" routerLink="register-partner" mat-flat-button color="primary">
-      Become a partner!<mat-icon>person_add</mat-icon>
+      Become a partner<mat-icon>person_add</mat-icon>
     </button>
+    <mat-icon mat-button *ngIf="isAdmin()" [matMenuTriggerFor]="settingsMenu">settings</mat-icon>
+    <mat-menu #settingsMenu="matMenu">
+      <button mat-menu-item (click)="openProductTypeView()">
+        <mat-icon>format_list_bulleted</mat-icon>
+        Product type
+      </button>
+    </mat-menu>
   </div>
 </mat-toolbar>

@@ -1,27 +1,38 @@
 span {
-    margin: 10px;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    align-items: center;
-    padding-left: 10px;
-    padding-right: 10px;
-    transition: background-color 1s eaase;
+  margin: 10px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  padding-left: 10px;
+  padding-right: 10px;
+  transition: background-color 1s eaase;
 }
 
 span.fade-transition {
-    background-color: bisque;
-}       
-
-.menu-button-conntainer {
-    display: flex;
-    justify-content: space-around;
-    width: max-content;
-
-    button {
-        margin: 5px;
-    }
+  background-color: bisque;
 }
 
+.menu-button-conntainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: max-content;
 
+  button {
+    margin: 5px;
+  }
+}
+
+mat-icon {
+  transition: 0.5s;
+  border-radius: 50%;
+}
+
+mat-icon:hover {
+  transition: 0.5s;
+  transform: rotateZ(180deg);
+  background-color: white;
+  box-shadow: 0px 0px 1px 1px;
+}

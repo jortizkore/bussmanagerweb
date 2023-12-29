@@ -46,6 +46,10 @@ export class AuthService {
         this.router.navigate(['']);
     }
 
+    isAdmin(): boolean {
+        return this.isUserLoggedIn ? this.loggedUser?.isAdmin ?? false : false;
+    }
+
     getSessionUser() {
         const user = sessionStorage.getItem('loggedUser');
 

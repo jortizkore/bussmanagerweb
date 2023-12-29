@@ -1,0 +1,13 @@
+<h3 mat-dialog-title>{{ data.title }}</h3>
+<div mat-dialog-content style="padding: 5px;">
+    <div>
+        <ng-template *ngComponentOutlet="currentComponent.value"></ng-template>
+    </div>
+    <div mat-dialog-actions class="modal-action-btns">
+        <span style="flex-grow: 1"></span>
+        <div>
+            <button mat-flat-button color="warn" (click)="closeDialog()">{{ data.cancelButtonText?? 'Cancel' }}</button>
+            <button mat-flat-button color="primary" (click)="executeCallBack()">{{ data.okButtonText??'Ok' }}</button>
+        </div>
+    </div>
+</div>

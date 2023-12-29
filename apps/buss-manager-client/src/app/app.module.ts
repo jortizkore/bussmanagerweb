@@ -33,6 +33,9 @@ import { BussinessListCardComponent } from './components/bussiness-list-card/bus
 import { AuthService } from './shared/auth/auth.service';
 import { NotificationService } from './shared/services/notification.service';
 import { BussinessDashboardComponent } from './pages/bussiness-dashboard/bussiness-dashboard.component';
+import { ProductTypesComponent } from './components/product-types/product-types.component';
+import { ModalService } from './shared/services/modal.service';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -60,9 +63,11 @@ import { BussinessDashboardComponent } from './pages/bussiness-dashboard/bussine
     AdminComponent,
     BussinessListCardComponent,
     BussinessDashboardComponent,
+    ProductTypesComponent,
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     MaterialModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes, { initialNavigation: 'enabledBlocking' }),
@@ -75,7 +80,8 @@ import { BussinessDashboardComponent } from './pages/bussiness-dashboard/bussine
     LoginService,
     AuthService,
     NotificationService,
+    ModalService
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

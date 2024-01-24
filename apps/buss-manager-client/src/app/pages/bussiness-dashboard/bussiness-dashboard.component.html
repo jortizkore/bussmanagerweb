@@ -1,6 +1,6 @@
 <mat-drawer-container class="drawer-container" autosize>
     <mat-drawer #drawer class="bussiness-sidenav" mode="side" [opened]="true">
-        <div class="sidenav-item" *ngFor="let route of bussinessMenuItems">
+        <div class="sidenav-item" *ngFor="let route of bussinessMenuItems" (click)="setMenuRoute(route)">
             <mat-icon>{{route.icon}}</mat-icon>
             <span>{{route.label}}</span>
         </div>
@@ -15,3 +15,7 @@
     </button>
 
 </mat-drawer-container>
+
+<div *ngIf="selectedMenuItem && selectedMenuItem.component">
+    <ng-container *ngTemplateOutlet="selectedMenuItem.component"></ng-container>
+</div>

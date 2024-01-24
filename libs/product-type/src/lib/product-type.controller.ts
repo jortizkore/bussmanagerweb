@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Patch, Post, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
 import { ProductTypeService } from './product-type.service';
 
 @Controller('product-type')
@@ -16,17 +16,18 @@ export class ProductTypeController {
   }
 
   @Post('product-type')
-  public async createProduct(@Body() productType: any) {
+  public async createProductType(@Body() productType: any) {
     return await this.productTypeService.saveProductType(productType);
   }
 
   @Patch('product-type')
-  public async updateProduct(@Body() productType: any) {
+  public async updateProductType(@Body() productType: any) {
     return await this.productTypeService.updateProductType(productType);
   }
 
-  @Delete('product-type?:id')
-  public async deleteProduct(@Query('id') id: number) {
+  @Delete('product-type/:id') // * use param instead of query to get query params
+  public async deleteProductType(@Param('id') id: number) {
+    console.log(`this is the deleted ID: ${id}`);
     return await this.productTypeService.deleteProductType(id);
   }
 

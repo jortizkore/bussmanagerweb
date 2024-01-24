@@ -1,1 +1,37 @@
-<p>product-types works!</p>
+<div style="padding: 25px">
+    <mat-accordion>
+        <mat-expansion-panel #productTypePanel style="margin-bottom: 10px">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <mat-label *ngIf="prodType.id && prodType.id > 0">Product type ID: {{ prodType.id }} </mat-label>
+                </mat-panel-title>
+                <mat-panel-description>
+                    Manage product types
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class='inline-container'>
+                <mat-form-field appearance="outline">
+                    <mat-label>Product type</mat-label>
+                    <input matInput #prodTypeInput maxlength="20" [(ngModel)]="prodType.typeName"
+                        [ngModelOptions]="{standalone: true}" required>
+                    <mat-hint>{{prodTypeInput.value.length}}/20</mat-hint>
+                    <mat-error>This field is required</mat-error>
+                </mat-form-field>
+                <span style="flex-grow: 1"></span>
+                <button mat-fab color="primary" (click)="saveProductType()">
+                    <mat-icon *ngIf="!prodType.id || prodType.id <= 0">add</mat-icon>
+                    <mat-icon *ngIf="prodType.id && prodType.id > 0">refresh</mat-icon>
+                </button>
+                <button mat-fab color="warn" *ngIf="prodType.id && prodType.id > 0" (click)="deleteProductType()">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
+        </mat-expansion-panel>
+    </mat-accordion>
+
+    <div *ngIf="data.length > 0">
+        <bmw-generic-table [data]="data" [columnDef]="columns" (dataSelected)="getSelectedProductType($event)">
+        </bmw-generic-table>
+    </div>
+
+</div>

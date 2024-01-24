@@ -24,3 +24,13 @@
 ::ng-deep .view-mat-form-field {
   margin: 5px;
 }
+
+form {
+  transition: 0.5s;
+}
+
+.inline-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}

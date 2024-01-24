@@ -10,3 +10,10 @@ export interface Bussiness {
     updatedAt?: string
 
 }
+
+export interface ProductType {
+    id?: number | null
+    typeName: string | null
+    createdAt?: Date
+    updatedAt?: Date
+}

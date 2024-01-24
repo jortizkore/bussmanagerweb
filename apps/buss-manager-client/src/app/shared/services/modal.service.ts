@@ -4,12 +4,13 @@ import { SharedModalComponent } from "../components/shared-modal/shared-modal.co
 
 @Injectable()
 export class ModalService {
+    dialogRef: any;
     constructor(private dialog: MatDialog) {
 
     }
 
-    openSharedModal(title: string, component: any, okFunction: any, okButtonText?: string, cancelButtonText?: string) {
-        this.dialog.open(SharedModalComponent, {
+    openSharedModal(title: string, component: any, okFunction?: any, okButtonText?: string, cancelButtonText?: string) {
+        this.dialogRef = this.dialog.open(SharedModalComponent, {
             data: {
                 title: title,
                 component: component,
@@ -20,5 +21,9 @@ export class ModalService {
             width: '600px',
             disableClose: true
         });
+    }
+
+    setOkFunction(fn: any) {
+        this.dialogRef.daya.okFunction = fn;
     }
 }

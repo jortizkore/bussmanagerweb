@@ -21,6 +21,7 @@ export class BussinessDashboardComponent {
   // General variables
   selectedBussiness: any;
   bussinessMenuItems = bussinessSideNavRoutes;
+  selectedMenuItem: any;
 
   constructor(private router: Router) {
     this.authService.verifyLoggedUser();
@@ -39,5 +40,9 @@ export class BussinessDashboardComponent {
   }
 
 
+  setMenuRoute(route: any) {
+    console.log(route);
+    this.selectedMenuItem = route
+  }
 
 }

@@ -1,10 +1,9 @@
 import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { Injectable, inject } from "@angular/core";
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import { environment } from "apps/buss-manager-client/src/environments/environment";
 import { Subject, Subscription } from "rxjs";
 import { Bussiness } from "../../shared/models/bussiness.model";
-import { Partner } from "../partners/partner.model";
 
 const httpOptions = {
     headers: {
@@ -20,11 +19,7 @@ export class BussinessService {
 
     apiUrl = environment.apiUrl;
 
-
-
-    constructor(private http: HttpClient) {
-
-    }
+    http = inject(HttpClient)
 
     getCurrentSelectedBussiness() {
         const bussinessInMemory = sessionStorage.getItem('selectedBussiness');
@@ -46,8 +41,6 @@ export class BussinessService {
             })
         )
     }
-
-    // To get partners bussiness go to partners service
 
     createBussiness(bussiness: Bussiness) {
         this.http.post(`${this.apiUrl}bussiness/bussiness`, JSON.stringify(bussiness), httpOptions).subscribe(

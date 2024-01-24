@@ -1,7 +1,9 @@
+import { ProductComponent } from '../../components/product/product.component'
+
 export const bussinessSideNavRoutes = [
     {
         label: 'Inventory',
-        component: null,
+        component: ProductComponent,
         icon: 'menu'
     },
     {

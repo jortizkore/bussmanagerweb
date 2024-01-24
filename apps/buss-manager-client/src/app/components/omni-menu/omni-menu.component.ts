@@ -42,7 +42,7 @@ export class OmniMenuComponent {
   }
 
   openProductTypeView() {
-    this.sharedModal.openSharedModal('Product types', ProductTypesComponent, () => { alert('This is a test'); });
+    this.sharedModal.openSharedModal('Product types', ProductTypesComponent, );
   }
 
 }

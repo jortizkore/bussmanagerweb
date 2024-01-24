@@ -1,12 +1,27 @@
 <div>
   <table mat-table [dataSource]="data" class="mat-elevation-z8">
-    <ng-container
-      *ngFor="let column of columnDef"
-      matColumnDef="{{ column.columnDef }}"
-    >
+
+    <ng-container *ngFor="let column of columnDef" matColumnDef="{{ column.columnDef }}">
+
+      <ng-container *ngIf="column.columnDef === 'check'">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-checkbox *ngIf="MultiSelect" color="primary" (change)="$event ? masterToggle() : null"
+            [checked]="selection.hasValue() && isAllSelected()"
+            [indeterminate]="selection.hasValue() && !isAllSelected()">
+          </mat-checkbox>
+          <span *ngIf="!MultiSelect">Select</span>
+        </th>
+        <td mat-cell *matCellDef="let col">
+          <div>
+            <mat-checkbox color="primary" (change)="$event ? selection.toggle(col): null"
+              [checked]="selection.isSelected(col)">
+            </mat-checkbox>
+          </div>
+        </td>
+      </ng-container>
+
       <ng-container
-        *ngIf="column.columnDef !== 'update' && column.columnDef !== 'delete'"
-      >
+        *ngIf="column.columnDef !== 'update' && column.columnDef !== 'delete' && column.columnDef !=='check'">
         <th mat-header-cell *matHeaderCellDef>{{ column.header }}</th>
         <td mat-cell *matCellDef="let col">{{ column.cell(col) }}</td>
       </ng-container>
@@ -16,17 +31,13 @@
         <th mat-header-cell *matHeaderCellDef>Update</th>
         <td mat-cell *matCellDef="let col">
           <div>
-            <button
-              mat-icon-button
-              color="primary"
-              (click)="
+            <button mat-icon-button color="primary" (click)="
                 triggerFunction(
                   column.cell(col).callBack,
                   col,
                   column.cell(col).redirectLink
                 )
-              "
-            >
+              ">
               <mat-icon>edit</mat-icon>
             </button>
           </div>
@@ -37,31 +48,37 @@
         <th mat-header-cell *matHeaderCellDef>{{ column.header }}</th>
         <td mat-cell *matCellDef="let col">
           <div>
-            <button
-              mat-icon-button
-              color="warn"
-              (click)="
+            <button mat-icon-button color="warn" (click)="
                 triggerFunction(
                   column.cell(col).callBack,
                   col,
                   column.cell(col).redirectLink
                 )
-              "
-            >
+              ">
               <mat-icon>{{ column.cell(col).icon }}</mat-icon>
             </button>
           </div>
         </td>
       </ng-container>
+      <!-- MAINTENANCE FIELD  -->
+      <!-- <ng-container *ngIf="column.columnDef === 'maintenance'">
+        <th mat-header-cell *matHeaderCellDef>{{ column.header }}</th>
+        <td mat-cell *matCellDef="let col">
+          <div>
+            <button mat-icon-button (click)="executeFn(column.cell(col).editFn)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button (click)="executeFn(column.cell(col).removeFn)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </td>
+      </ng-container> -->
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="columns"></tr>
     <tr mat-row *matRowDef="let row; columns: columns"></tr>
 
-    <mat-paginator
-      [length]="data.length"
-      aria-label=""
-      [pageSizeOptions]="pageSizeOptions"
-    ></mat-paginator>
+    <mat-paginator [length]="data.length" aria-label="" [pageSizeOptions]="pageSizeOptions"></mat-paginator>
   </table>
 </div>

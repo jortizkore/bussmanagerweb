@@ -36,6 +36,9 @@ import { BussinessDashboardComponent } from './pages/bussiness-dashboard/bussine
 import { ProductTypesComponent } from './components/product-types/product-types.component';
 import { ModalService } from './shared/services/modal.service';
 import { CommonModule } from '@angular/common';
+import { ProductTypeService } from './components/product-types/product-type.service';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ProductComponent } from './components/product/product.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +67,7 @@ import { CommonModule } from '@angular/common';
     BussinessListCardComponent,
     BussinessDashboardComponent,
     ProductTypesComponent,
+    ProductComponent,
   ],
   imports: [
     BrowserModule,
@@ -72,16 +76,18 @@ import { CommonModule } from '@angular/common';
     HttpClientModule,
     RouterModule.forRoot(appRoutes, { initialNavigation: 'enabledBlocking' }),
     BrowserAnimationsModule,
+    ReactiveFormsModule,
   ],
   providers: [
     PartnerService,
     BussinessService,
+    ProductTypeService,
     HttpClient,
     LoginService,
     AuthService,
     NotificationService,
-    ModalService
+    ModalService,
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

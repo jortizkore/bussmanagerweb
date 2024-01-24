@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { FormControl } from "@angular/forms";
 import Swal from 'sweetalert2'
 
 @Injectable()
@@ -51,4 +52,17 @@ export class NotificationService {
             }
         })
     }
-} 
+
+    showLoading() {
+        Swal.showLoading();
+    }
+
+
+    checkFieldValidationErrors(control: FormControl) {
+        if (control?.hasError('required')) {
+            return 'You must enter a value';
+        }
+
+        return control?.hasError('email') ? 'Not a valid email' : '';
+    }
+}

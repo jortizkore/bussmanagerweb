@@ -5,7 +5,6 @@ import { Partner } from "./partner.model";
 // TODO: eslint-disable-next-line @nx/enforce-module-boundaries
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import { environment } from "apps/buss-manager-client/src/environments/environment";
-import { Bussiness } from "../../shared/models/bussiness.model";
 
 
 const httpOptions = {

@@ -3,8 +3,6 @@ import { Component, Inject, OnInit } from "@angular/core";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { MatButtonModule } from "@angular/material/button";
 
-
-
 interface SharedModalData {
     title: string,
     component: any,
@@ -17,7 +15,7 @@ interface SharedModalData {
     templateUrl: './shared-modal.component.html',
     styleUrls: ['./shared-modal.component.scss'],
     standalone: true,
-    imports: [CommonModule, MatButtonModule]
+    imports: [CommonModule, MatButtonModule],
 })
 export class SharedModalComponent implements OnInit {
     currentComponent: any;

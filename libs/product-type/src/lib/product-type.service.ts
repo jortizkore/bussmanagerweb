@@ -30,7 +30,7 @@ export class ProductTypeService {
     }
 
     public async deleteProductType(_id: number) {
-        return await prisma.productType.delete({ where: { id: _id } });
+        return await prisma.productType.delete({ where: { id: +_id } });
     }
 
 }
